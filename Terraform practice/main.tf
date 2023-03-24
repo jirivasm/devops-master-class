@@ -24,3 +24,6 @@ resource "aws_s3_bucket_versioning" "test-bucket-versioning" {
     status = "Enabled"
   }
 }
+resource "aws_iam_user" "test-iam-user" {
+    name = "test-iam-user-abc"
+}
