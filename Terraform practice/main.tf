@@ -1,29 +1,16 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "4.60.0"
     }
   }
-  backend "s3" {
-    bucket = "jirivasm-test-bucket"
-    key = "terraform .tfstatefile"
-    region = "us-east-2"
-  }
 }
-provider "aws"{
-    region = "us-east-2"
+
+provider "aws" {
+  region = "us-east-2"
 }
-resource "aws_s3_bucket" "jirivasm-test-bucket"{
-    bucket = "jirivasm-test-bucket"
-    
-}
-resource "aws_s3_bucket_versioning" "test-bucket-versioning" {
-  bucket =  aws_s3_bucket.jirivasm-test-bucket.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-resource "aws_iam_user" "test-iam-user" {
-    name = "test-iam-user-abc"
+resource "aws_iam_user" "my_iam_users" {
+  count = 2
+  name  = "my_aim_user_${count.index}"
 }
